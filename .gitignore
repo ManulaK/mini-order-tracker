@@ -1,0 +1,39 @@
+.DS_Store
+node_modules/
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+.env
+.env.local
+.env.*
+.env.*.local
+.vscode/
+.idea/
+.dist/
+# Build output
+/dist/
+build/
+*.tsbuildinfo
+coverage/
+out/
+*.swp
+*.swo
+*~
+*.tmp
+.cache/
+
+# macOS
+.AppleDouble
+.LSOverride
+
+# Thumbnails
+._*
+
+# VS Code
+.history/
