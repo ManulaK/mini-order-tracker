@@ -7,8 +7,9 @@ import { ResponseHandler } from "../../shared/response-handler.js";
 
 const validItemIds = new Set(catalogItems.map((item) => item.id));
 
-export const getOrders = (_req: Request, res: Response) => {
+export const getOrders = async (_req: Request, res: Response) => {
 	try {
+		await new Promise((resolve) => setTimeout(resolve, 2000));
 		const orders = getAllOrders();
 		return ResponseHandler.ok(res, orders);
 	} catch (error) {
