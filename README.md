@@ -8,13 +8,6 @@ A small order-tracking project with three apps:
 
 Run the backend first, then run the web or mobile app in another terminal.
 
-## Screenshots
-
-<p>
-  <img src="web/public/web.png" alt="Web app screenshot" width="360" />
-  <img src="web/public/mobile.png" alt="Mobile app screenshot" width="160" />
-</p>
-
 ## Project Structure
 
 ```text
@@ -145,3 +138,10 @@ npm run dev -- --port 5174
 AI assistance was used only for UI enhancement ideas, utility function creation, dummy data setup, theme color design, generated comments/wording cleanup, HTTP client development support, and drafting parts of this README.
 
 The base implementation was done by hand. This includes the project architecture, backend endpoint creation, route and status behavior, validation handling, response handling, state handling, web and mobile feature logic, integration between the clients and backend, and final review/editing of the code.
+
+## Screenshots
+
+<p>
+  <img src="web/public/web.png" alt="Web app screenshot" width="360" />
+  <img src="web/public/mobile.png" alt="Mobile app screenshot" width="160" />
+</p>
