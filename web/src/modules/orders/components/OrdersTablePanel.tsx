@@ -1,5 +1,5 @@
 import { useMemo, useState } from "react";
-import { CircleCheck } from "lucide-react";
+import { CircleCheck, LoaderCircle } from "lucide-react";
 import { DropdownMenu, type DropdownOption } from "../../../shared/components/DropdownMenu";
 import type { Order } from "../types/order.types";
 import { filterOrders, getOrderStatusOptions } from "../utils/order-filters";
@@ -27,13 +27,23 @@ function OrderActionButton({ isAdvancing, onAdvanceOrder, order }: OrderActionBu
 	return (
 		<button
 			aria-label={`${statusDetails.actionLabel} for order #${order.id}`}
+			aria-busy={isAdvancing}
 			className="group inline-flex h-8 min-w-36 items-center justify-center gap-2 rounded-md border border-zinc-300 bg-white px-3 text-xs font-semibold text-zinc-900 transition hover:border-zinc-500 hover:bg-zinc-50 focus:outline-none focus:ring-2 focus:ring-emerald-600 focus:ring-offset-2 disabled:cursor-not-allowed disabled:border-zinc-200 disabled:bg-zinc-50 disabled:text-zinc-400"
 			disabled={statusDetails.isComplete || isAdvancing}
 			onClick={onAdvanceOrder}
 			type="button"
 		>
-			<CircleCheck className="h-3.5 w-3.5 text-emerald-600 group-disabled:text-zinc-400" aria-hidden="true" strokeWidth={2.2} />
-			{isAdvancing ? statusDetails.loadingActionLabel : statusDetails.actionLabel}
+			{isAdvancing ? (
+				<>
+					<LoaderCircle className="h-3.5 w-3.5 animate-spin text-zinc-500" aria-hidden="true" strokeWidth={2.2} />
+					<span>Pending...</span>
+				</>
+			) : (
+				<>
+					<CircleCheck className="h-3.5 w-3.5 text-emerald-600 group-disabled:text-zinc-400" aria-hidden="true" strokeWidth={2.2} />
+					<span>{statusDetails.actionLabel}</span>
+				</>
+			)}
 		</button>
 	);
 }
