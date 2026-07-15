@@ -5,9 +5,11 @@ import { ResponseHandler } from "./shared/response-handler.js";
 
 export const app = express();
 
+const API_PREFIX = "/api/v1";
+
 app.use(
 	cors({
-		methods: ["GET", "PUT", "POST", "OPTIONS"],
+		methods: ["GET", "POST", "PATCH", "OPTIONS"],
 		origin: "*",
 	}),
 );
@@ -15,7 +17,7 @@ app.use(
 app.use(express.json());
 
 app.get("/", (_req: Request, res: Response) => {
-	ResponseHandler.ok(res, { version: "1.0.0" }, "Server is running");
+	return ResponseHandler.ok(res, { version: "1.0.0" }, "Server is running");
 });
 
-app.use("/orders", orderRoutes);
+app.use(`${API_PREFIX}/orders`, orderRoutes);
