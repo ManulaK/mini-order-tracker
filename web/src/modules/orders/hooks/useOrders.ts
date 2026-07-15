@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { isHttpRequestCanceled } from "../../../shared/api";
 import { advanceOrderStatus, fetchOrders } from "../api/orders.api";
 import type { Order } from "../types/order.types";
 
@@ -10,30 +9,19 @@ export const useOrders = () => {
 	const [error, setError] = useState("");
 
 	useEffect(() => {
-		const controller = new AbortController();
-
 		const loadOrders = async () => {
 			try {
 				setIsLoading(true);
 				setError("");
-				setOrders(await fetchOrders(controller.signal));
+				setOrders(await fetchOrders());
 			} catch (requestError) {
-				// Ignore aborts from cleanup; they are not real user-facing errors.
-				if (isHttpRequestCanceled(requestError)) {
-					return;
-				}
-
 				setError(requestError instanceof Error ? requestError.message : "Unable to load orders");
 			} finally {
-				if (!controller.signal.aborted) {
-					setIsLoading(false);
-				}
+				setIsLoading(false);
 			}
 		};
 
 		void loadOrders();
-
-		return () => controller.abort();
 	}, []);
 
 	const advanceOrder = async (orderId: number) => {
@@ -41,8 +29,8 @@ export const useOrders = () => {
 			setError("");
 			setAdvancingOrderId(orderId);
 
-			const updatedOrder = await advanceOrderStatus(orderId);
-			setOrders((currentOrders) => currentOrders.map((order) => (order.id === updatedOrder.id ? updatedOrder : order)));
+			await advanceOrderStatus(orderId);
+			setOrders(await fetchOrders());
 		} catch (requestError) {
 			setError(requestError instanceof Error ? requestError.message : "Unable to advance order status");
 		} finally {

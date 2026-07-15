@@ -1,1 +1,1 @@
-export { httpClient, isHttpRequestCanceled } from "./http-client";
+export { httpClient } from "./http-client";

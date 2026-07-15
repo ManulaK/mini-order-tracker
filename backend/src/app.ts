@@ -16,7 +16,7 @@ app.use(
 
 app.use(express.json());
 
-app.get("/", (_req: Request, res: Response) => {
+app.get(`${API_PREFIX}/`, (_req: Request, res: Response) => {
 	return ResponseHandler.ok(res, { version: "1.0.0" }, "Server is running");
 });
 

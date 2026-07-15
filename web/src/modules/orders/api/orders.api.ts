@@ -5,7 +5,6 @@ const isApiResponse = <T>(payload: ApiResponse<T> | T): payload is ApiResponse<T
 	typeof payload === "object" && payload !== null && "success" in payload && "statusCode" in payload;
 
 export const fetchOrders = async (signal?: AbortSignal): Promise<Order[]> => {
-	
 	const response = await httpClient.get<ApiResponse<Order[]> | Order[]>("/orders", { signal });
 	const payload = response.data;
 	const orders = isApiResponse(payload) ? payload.data : payload;
@@ -18,7 +17,7 @@ export const fetchOrders = async (signal?: AbortSignal): Promise<Order[]> => {
 };
 
 export const advanceOrderStatus = async (orderId: number): Promise<Order> => {
-	const response = await httpClient.put<ApiResponse<Order> | Order>(`/orders/${orderId}`);
+	const response = await httpClient.patch<ApiResponse<Order> | Order>(`/orders/${orderId}/status`);
 	const payload = response.data;
 	const order = isApiResponse(payload) ? payload.data : payload;
 
