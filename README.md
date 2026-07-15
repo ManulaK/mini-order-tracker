@@ -8,6 +8,13 @@ A small order-tracking project with three parts:
 
 Run the backend first, then start the web or mobile app in a separate terminal.
 
+## Screenshots
+
+<p>
+  <img src="web/public/web.png" alt="Web app screenshot" width="360" />
+  <img src="web/public/mobile.png" alt="Mobile app screenshot" width="160" />
+</p>
+
 ## Prerequisites
 
 - Node.js and npm
